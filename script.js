@@ -1,27 +1,20 @@
-const buscador = document.getElementById("buscador");
-const cards = document.querySelectorAll(".card");
-const mensaje = document.getElementById("sinResultados");
+document.addEventListener("DOMContentLoaded", () => {
 
+    const buscador = document.getElementById("buscador");
+    const cards = document.querySelectorAll(".card");
 
-/* cada vez que el usuario escribe hacemos que se muestre al momento del evento */
-buscador.addEventListener("keyup", () => {    
-    const texto = buscador.value.toLowerCase();
-    let encontrados = 0;
+    buscador.addEventListener("input", () => {
+        const texto = buscador.value.toLowerCase();
 
-    cards.forEach(card => {
-        const contenido = card.textContent.toLowerCase();
+        cards.forEach(card => {
+            const contenido = card.textContent.toLowerCase();
 
-        if (contenido.includes(texto)) {  // Verificar si coincide la busqueda con lo que escribimos 
-            card.classList.remove("oculto");
-            encontrados++;
-        } else {
-            card.classList.add("oculto");
-        }
+            if (contenido.includes(texto)) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
     });
 
-    if (encontrados === 0) {
-        mensaje.style.display = "block";
-    } else {
-        mensaje.style.display = "none";
-    }
 });
